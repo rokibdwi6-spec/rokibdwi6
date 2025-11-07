@@ -3,33 +3,130 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CV Rokib Dwi Pranata</title>
+  <title>CV Rokib Dwi Pranata | CV. E-Solusindo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body { font-family: Arial; margin: 40px; line-height: 1.6; }
-    h1, h2 { color: #333; }
-    .section { margin-bottom: 20px; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f4f8ff;
+      color: #333;
+      line-height: 1.6;
+      padding: 30px;
+    }
+
+    .container {
+      max-width: 800px;
+      background: #fff;
+      margin: 0 auto;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      padding: 40px;
+      border-top: 6px solid #0078ff;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    header h1 {
+      color: #0078ff;
+      font-size: 28px;
+    }
+
+    header p {
+      font-size: 15px;
+      color: #555;
+    }
+
+    section {
+      margin-bottom: 25px;
+    }
+
+    h2 {
+      color: #0078ff;
+      font-size: 20px;
+      border-bottom: 2px solid #0078ff;
+      display: inline-block;
+      margin-bottom: 10px;
+      padding-bottom: 4px;
+    }
+
+    ul {
+      list-style: square inside;
+      margin-top: 8px;
+      margin-left: 10px;
+    }
+
+    .skills span {
+      background: #0078ff;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 13px;
+      margin: 3px;
+      display: inline-block;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 13px;
+      color: #666;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 15px; }
+      .container { padding: 25px; }
+    }
   </style>
 </head>
 <body>
-  <h1>Rokib Dwi Pranata</h1>
-  <p>📍 Jember | 📧 rokibdwi@gmail.com | 💻 github.com/rokibdwi</p>
+  <div class="container">
+    <header>
+      <h1>Rokib Dwi Pranata</h1>
+      <p>📍 Jember | 📧 rokibdwi@gmail.com | 💻 github.com/rokibdwi6-spec</p>
+      <p><strong>PKL di CV. E-Solusindo</strong></p>
+    </header>
 
-  <div class="section">
-    <h2>Pendidikan</h2>
-    <p><strong>SMKN 6 Jember</strong> — Rekayasa Perangkat Lunak (RPL)<br>2023 – Sekarang</p>
-  </div>
+    <section>
+      <h2>Tentang Saya</h2>
+      <p>Saya adalah siswa SMKN 6 Jember jurusan Rekayasa Perangkat Lunak (RPL) dengan minat tinggi di bidang pengembangan aplikasi berbasis web. Memiliki kemampuan dasar dalam Laravel, PHP, dan desain antarmuka yang rapi serta responsif.</p>
+    </section>
 
-  <div class="section">
-    <h2>Proyek</h2>
-    <ul>
-      <li>Aplikasi Toko Alat Tulis Kosmeta (Laravel)</li>
-      <li>Sistem Booking Bengkel Motor</li>
-    </ul>
-  </div>
+    <section>
+      <h2>Pendidikan</h2>
+      <p><strong>SMKN 6 Jember</strong> — Rekayasa Perangkat Lunak (RPL)<br>2023 – Sekarang</p>
+    </section>
 
-  <div class="section">
-    <h2>Keahlian</h2>
-    <p>HTML, CSS, JavaScript, PHP, Laravel, MySQL, Git</p>
+    <section>
+      <h2>Proyek</h2>
+      <ul>
+        <li><strong>Aplikasi Toko Alat Tulis Kosmeta</strong> — Laravel, MySQL</li>
+        <li><strong>Sistem Booking Bengkel Motor</strong> — PHP, HTML, CSS</li>
+      </ul>
+    </section>
+
+    <section class="skills">
+      <h2>Keahlian</h2>
+      <span>HTML</span>
+      <span>CSS</span>
+      <span>JavaScript</span>
+      <span>PHP</span>
+      <span>Laravel</span>
+      <span>MySQL</span>
+      <span>Git & GitHub</span>
+    </section>
+
+    <footer>
+      © 2025 Rokib Dwi Pranata — SMKN 6 Jember
+    </footer>
   </div>
 </body>
 </html>
