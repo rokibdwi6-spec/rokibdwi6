@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Perpustakaan Modern</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Perpustakaan</h1>
+<div class="container">
+    <div class="box">
+        <h2>Buku</h2>
+        <input id="judul" placeholder="Judul Buku">
+        <input id="penulis" placeholder="Penulis">
+        <input id="stok" type="number" placeholder="Stok">
+        <button onclick="addBuku()">Tambah Buku</button>
+
+        <table>
+        <thead>
+        <tr><th>Judul</th><th>Penulis</th><th>Stok</th><th>Aksi</th></tr>
+        </thead>
+        <tbody id="dataBuku"></tbody>
+        </table>
+    </div>
+
+    <div class="box">
+        <h2>Peminjaman</h2>
+        <table>
+        <thead>
+        <tr><th>Nama</th><th>Buku</th><th>Tanggal Pinjam</th><th>Status</th><th>Aksi</th></tr>
+        </thead>
+        <tbody id="dataPinjam"></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+function loadBuku(){
+    fetch("api_buku.php?action=read").then(r=>r.json()).then(data=>{
+        let html="";
+        data.forEach(b=>{
+            html+=`<tr>
+                <td>${b.judul}</td>
+                <td>${b.penulis}</td>
+                <td>${b.stok}</td>
+                <td>
+                    <button class="pinjam" onclick="pinjam(${b.id})">Pinjam</button>
+                    <button class="hapus" onclick="hapusBuku(${b.id})">Hapus</button>
+                </td>
+            </tr>`;
+        });
+        document.getElementById("dataBuku").innerHTML=html;
+    });
+}
+
+function addBuku(){
+    let f=new FormData();
+    f.append("judul",document.getElementById("judul").value);
+    f.append("penulis",document.getElementById("penulis").value);
+    f.append("stok",document.getElementById("stok").value);
+    fetch("api_buku.php?action=create",{method:"POST",body:f})
+    .then(()=>{ loadBuku(); loadPeminjaman(); });
+}
+
+function hapusBuku(id){
+    let f=new FormData(); f.append("id",id);
+    fetch("api_buku.php?action=delete",{method:"POST",body:f})
+    .then(()=>{ loadBuku(); loadPeminjaman(); });
+}
+
+function pinjam(id){
+    let nama=prompt("Nama Peminjam:");
+    if(!nama) return;
+    let f=new FormData(); f.append("buku_id",id); f.append("nama_peminjam",nama);
+    fetch("api_transaksi.php?action=pinjam",{method:"POST",body:f})
+    .then(()=>{ loadBuku(); loadPeminjaman(); });
+}
+
+function loadPeminjaman(){
+    fetch("api_transaksi.php?action=riwayat").then(r=>r.json()).then(data=>{
+        let html="";
+        data.forEach(p=>{
+            html+=`<tr>
+                <td>${p.nama_peminjam}</td>
+                <td>${p.judul}</td>
+                <td>${p.tanggal_pinjam}</td>
+                <td>${p.status}</td>
+                <td>${p.status==='pinjam'?`<button class="kembali" onclick="kembalikan(${p.id})">Kembalikan</button>`:'-'}</td>
+            </tr>`;
+        });
+        document.getElementById("dataPinjam").innerHTML=html;
+    });
+}
+
+function kembalikan(id){
+    if(!confirm("Yakin ingin mengembalikan buku ini?")) return;
+    let f=new FormData(); f.append("id",id);
+    fetch("api_transaksi.php?action=kembali",{method:"POST",body:f})
+    .then(r=>r.json()).then(d=>{ alert(d.status); loadBuku(); loadPeminjaman(); });
+}
+
+// Load awal
+loadBuku();
+loadPeminjaman();
+</script>
+
+</body>
+</html>
